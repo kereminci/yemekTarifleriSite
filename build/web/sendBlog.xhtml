@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+         <title>Validating Form Data</title>
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="resources/css/test.css"> </link>
+        
+
+        
+    </h:head>
+    <h:body >
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <h:link class="nav-link text-white" value = "Ana Sayfa" outcome = "index" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    
+                    <li class="nav-item">
+                        <h:link rendered="#{user.isLoggedIn}" class="nav-link" value = "Blog Ekle" outcome = "sendBlog" />
+                    </li>
+                    
+                    <li class="nav-item">
+                        <h:link rendered="#{user.isLoggedIn}" class="nav-link" value="Tarif Ekle" outcome="sendFood"/>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <h:link class="nav-link" rendered="#{user.isLoggedIn == false}" value = "Giriş" outcome = "login" />
+                    </li>
+                    <li class="nav-item">
+                        <h:link class="nav-link" rendered="#{user.isLoggedIn == false}" value = "Kayıt Ol" outcome = "register" />
+                    </li>
+                    
+                    <li class="nav-item">
+                        <h:link class="nav-link"  value = "Tarifler" outcome = "recipes" />
+                    </li>
+                    
+                    <li class="nav-item">
+                        
+                        <h:link class="nav-link" value="Bloglar" outcome="blog" />
+                    </li>
+                    
+                    <li class="nav-item">
+                        <h:link class="nav-link" value="Hesabım" outcome="myAccount" rendered="#{user.isLoggedIn}"/>
+                    </li>
+                    
+                    <li class="nav-item">
+                        
+                         <h:form>
+                            <h:commandLink  action="#{user.logout()}" class="nav-link" value="Çıkış Yap"/>
+                        </h:form>
+                    </li>
+                </ul>
+                
+            </div>  
+        </nav>
+        
+       <div class="outer ">
+            <h:form class="w-50">      
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <label class="text-white" for="floatingPassword">Blog Başlığı</label> 
+                <h:inputText id="title" value="#{blog.title}" label="title" maxlength="40"            
+                             size="15" alt="title" autocomplete="off" readonly="false" required="true"              
+                             requiredMessage="Blog adı gereklidir" accesskey="q" class="form-control">  
+                </h:inputText> 
+                <h:message for = "title" style = "color:red" />
+                <br/>
+                <label class="text-white" for="floatingPassword">Blog İçeriği </label>
+                <h:inputTextarea id="ingredients" value="#{blog.info}" required="true"   
+                requiredMessage="Blog açıklması gereklidir" cols="50" rows="10" class="form-control"></h:inputTextarea>
+                <h:message for = "ingredients" style = "color:red" />
+                <br></br>
+                <br></br>
+                <h:commandButton id="submit-button" class="btn btn-primary" value="Blog Ekle" type="submit" action="#{blog.sendBlog()}">  
+                    
+                </h:commandButton>
+            </h:form>          
+        </div>
+    </h:body>
+</html>
+

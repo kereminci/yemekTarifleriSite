@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough/"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Hesap Bilgilerim</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> </link>
+ <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="resources/css/account.css"> </link>
+
+    </h:head>
+    <h:body>
+       <div class="main-content">
+    <div class="container mt-7">
+      <!-- Table -->
+      
+      <div class="row">
+        <div class="col-xl-8 m-auto order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Hesabım</h3>
+                </div>
+                <div class="col-4 text-right">
+                  
+                   <h:link class="btn btn-sm btn-primary" value = "Ana Sayfa" outcome = "index" />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form>
+                <h6 class="heading-small text-muted mb-4">Kullanıcı Bilgileri</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="output-username">Kullanıcı Adı</label>
+                        <h:outputText value="#{user.username}" id="output-username" class="form-control form-control-alternative text-dark"/>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="output-email">Mail Adresi</label>
+                        <h:outputText value="#{user.mail}" id="output-email" class="form-control form-control-alternative text-dark"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="output-password">Şifre</label>
+                        <h:outputText id="output-password" class="form-control form-control-alternative text-dark"  value="#{user.password}"/>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="output-gender">Cinsiyet</label>
+                        <h:outputText  id="output-gender" class="form-control form-control-alternative text-dark"  value="#{user.gender == 'M' ? 'Erkek' : 'Kadın'}" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4"/>
+              </form>
+                
+                <h:form>
+                    <div class="card-body">
+              
+                <h6 class="heading-small text-muted mb-4">Kullanıcı Bilgileri Değiştir</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-username"> Yeni Kullanıcı Adı</label>
+                        <h:inputText value="#{user.newUsername}" id="input-username" class="form-control form-control-alternative text-dark">
+                            <f:validator validatorId ="registerUsernameValidator" />
+                        </h:inputText>
+                        
+                      </div>
+                         
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Yeni Mail Adresi</label>
+                        <h:inputText value="#{user.newMail}" id="input-email" class="form-control form-control-alternative text-dark"/>
+                      
+                      </div>
+              
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-password">Yeni Şifre</label>
+                        <h:inputText id="input-password" class="form-control form-control-alternative text-dark"  value="#{user.newPassword}"/>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-gender"> Yeni Cinsiyet</label>
+                        <h:selectOneRadio id="input-gender" class="text-dark" value = "#{user.newGender}" required="true"              
+                                  requiredMessage="Cinsiyeti seçiniz"> 
+
+                    <f:selectItem itemValue = "male" itemLabel = "Erkek" /> 
+                    <br/>
+                    <f:selectItem itemValue = "female" itemLabel = "Kadın" />
+                </h:selectOneRadio> 
+                       
+                      </div>
+                    </div>
+                  </div>
+                    
+                </div>
+                <h:commandButton id="submit-button" class="btn btn-primary" value="Güncelle" >
+                    <f:actionListener binding="#{user.newUsername == null ? null : user.changeUsername()}"/>
+                    <f:actionListener binding="#{user.newPassword == null ? null : user.changePassword()}"/>
+                    <f:actionListener binding="#{user.newMail == null ? null : user.changeEmail()}"/>
+                    <f:actionListener binding="#{user.newGender == null ? null : user.changeGender()}"/>
+                     </h:commandButton>
+                <hr class="my-4"/>
+             <h:link class="btn btn-sm btn-primary" value = "Tariflerim" outcome = "myFood" />
+             <h:link class="btn btn-sm btn-primary" value = "Bloglarım" outcome = "myBlog" />
+            </div>
+                </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6 m-auto text-center">
+        
+      </div>
+    </div>
+  </footer>
+    </h:body>
+</html>
